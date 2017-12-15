@@ -56,5 +56,6 @@ Mkfile.old
 dkms.conf
 
 .DS_Store
+.ipynb_checkpoints/
 
 # End of https://www.gitignore.io/api/c
