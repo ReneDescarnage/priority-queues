@@ -1,55 +1,130 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct node {
-    struct node *next;
-    struct node *previous;
-    int data;
-    int priority;
+	double priority;
+	struct node* next;
+	struct node* previous;
 };
 
-struct node *head = NULL;
-struct node *tail = NULL;
+struct node* head = NULL;
+struct node* tail = NULL;
 
-void enqueue() {
-
+struct node* create_new_node(double priority) {
+	struct node* newNode = (struct node*)malloc(sizeof(struct node));
+	newNode->priority = priority;
+	newNode->previous = NULL;
+	newNode->next = NULL;
+	return newNode;
 }
 
-struct node* dequeue() {
+void insert_from_head(double priority) {
+	struct node* newNode = create_new_node(priority);
+    struct node* temp = head;
 
+	if (head == NULL) {
+	    head = newNode;
+		tail = newNode;
+	} else {
+        while (priority < temp->priority) {
+            temp = temp->next;
+        }
+        newNode->next = temp;
+        newNode->previous = temp->previous;
+        if (temp->previous != NULL) {
+            temp->previous->next = newNode;
+        } else {
+            head = newNode;
+        }
+        temp->previous = newNode;
+    }
 }
 
-void insert_at_head(int data, int priority) {
+void insert_from_tail(double priority) {
+	struct node* newNode = create_new_node(priority);
+    struct node* temp = tail;
 
-    struct node *newNode = (struct node*) malloc(sizeof(struct node));
-    newNode->data = data;
-    newNode->priority = priority;
-
-    if (head == NULL) {
-        tail = newNode;
+	if (tail == NULL) {
+	    head = newNode;
+		tail = newNode;
     } else {
-        head->previous = newNode;
+        while (priority > temp->priority) {
+            temp = temp->previous;
+        }
+        newNode->previous = temp;
+        newNode->next = temp->next;
+        if (temp->next != NULL) {
+            temp->next->previous = newNode;
+        } else {
+            tail = newNode;
+        }
+        temp->next = newNode;
+    }
+}
+
+void traversal_print() {
+	struct node* temp = head;
+	printf("\nList: ");
+
+	while (temp != NULL) {
+		printf("%f ", temp->priority);
+		temp = temp->next;
+	}
+
+	printf("\n");
+}
+
+double average_priority() {
+	struct node* temp = head;
+    double prioritySum = 0;
+    int count = 0;
+
+	while (temp != NULL) {
+        prioritySum += temp->priority;
+        count++;
+		temp = temp->next;
+	}
+
+	return count > 0 ? prioritySum / count : 0;
+}
+
+void enqueue(double priority) {
+    double averagePriority = average_priority();
+
+    if (priority > averagePriority) {
+        printf("Priority %f > %f (avg): inserting from head!\n", priority, averagePriority);
+        insert_from_head(priority);
+    } else {
+        printf("Priority %f < %f (avg): inserting from tail!\n", priority, averagePriority);
+        insert_from_tail(priority);
+    }
+}
+
+double dequeue() {
+    if (head == NULL) {
+        fprintf(stderr, "Cannot dequeue from an empty queue!\n");
+        exit(1);
     }
 
-    newNode->next = head;
-    head = newNode;
+    struct node* temp = head;
+    head = head->next;
+    double priority = temp->priority;
+    free(temp);
 
+    return priority;
 }
 
-void insert_at_tail(int data, int priority) {
-    
-    struct node *newNode = (struct node*) malloc(sizeof(struct node));
-    newNode->data = data;
-    newNode->priority = priority;
+int main() {
+	
+    enqueue(6.0);
+    enqueue(12.0);
+    enqueue(7.0);
+    enqueue(2.0);
 
-    if (head == NULL) {
-        tail = newNode;
-    } else {
-        tail->next = newNode;
-        newNode->previous = tail;
-    }
+    traversal_print();
 
-    tail = newNode;
+    dequeue();
+    dequeue();
 
+    traversal_print();
 }
-
