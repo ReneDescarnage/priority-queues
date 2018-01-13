@@ -123,17 +123,21 @@ double dequeue() {
         fprintf(stderr, "Cannot dequeue from an empty queue!\n");
         exit(1);
     }
+    // traversal_print();
 
     struct node* temp = head;
-    head = head->next;
-    head->previous = NULL;
+    double priority = temp->priority;
+    head = head->next; 
+    if (head != NULL) // should be NULL if last element
+        head->previous = NULL;
     free(temp);
 
     // printf("Dequeue - ");
+    // printf("List AFTER DQ \n");
     // traversal_print();
     // printf("\n");
 
-    return temp->priority;;
+    return priority;
 }
 
 // int main() {
