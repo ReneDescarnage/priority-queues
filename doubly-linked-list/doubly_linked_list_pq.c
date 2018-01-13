@@ -18,35 +18,53 @@ struct node* create_new_node(double priority) {
 	return newNode;
 }
 
-void prepend(double priority) {
+void insert_from_head(double priority) {
 	struct node* newNode = create_new_node(priority);
+    struct node* temp = head;
 
 	if (head == NULL) {
+	    head = newNode;
 		tail = newNode;
 	} else {
-        head->previous = newNode;
+        while (priority < temp->priority) {
+            temp = temp->next;
+        }
+        newNode->next = temp;
+        newNode->previous = temp->previous;
+        if (temp->previous != NULL) {
+            temp->previous->next = newNode;
+        } else {
+            head = newNode;
+        }
+        temp->previous = newNode;
     }
-
-	newNode->next = head; 
-	head = newNode;
 }
 
-void append(double priority) {
+void insert_from_tail(double priority) {
 	struct node* newNode = create_new_node(priority);
+    struct node* temp = tail;
 
-	if (head == NULL) {
+	if (tail == NULL) {
+	    head = newNode;
 		tail = newNode;
     } else {
-        tail->next = newNode;
-        newNode->previous = tail;
+        while (priority > temp->priority) {
+            temp = temp->previous;
+        }
+        newNode->previous = temp;
+        newNode->next = temp->next;
+        if (temp->next != NULL) {
+            temp->next->previous = newNode;
+        } else {
+            tail = newNode;
+        }
+        temp->next = newNode;
     }
-
-	tail = newNode;
 }
 
 void traversal_print() {
 	struct node* temp = head;
-	printf("List: ");
+	printf("\nList: ");
 
 	while (temp != NULL) {
 		printf("%f ", temp->priority);
@@ -56,7 +74,31 @@ void traversal_print() {
 	printf("\n");
 }
 
-// void enqueue() {}
+double average_priority() {
+	struct node* temp = head;
+    double prioritySum = 0;
+    int count = 0;
+
+	while (temp != NULL) {
+        prioritySum += temp->priority;
+        count++;
+		temp = temp->next;
+	}
+
+	return count > 0 ? prioritySum / count : 0;
+}
+
+void enqueue(double priority) {
+    double averagePriority = average_priority();
+
+    if (priority > averagePriority) {
+        printf("Priority %f > %f (avg): inserting from head!\n", priority, averagePriority);
+        insert_from_head(priority);
+    } else {
+        printf("Priority %f < %f (avg): inserting from tail!\n", priority, averagePriority);
+        insert_from_tail(priority);
+    }
+}
 
 double dequeue() {
     if (head == NULL) {
@@ -74,13 +116,15 @@ double dequeue() {
 
 int main() {
 	
-    prepend(1.0);
-    prepend(2.0);
-    append(3.0);
-    traversal_print();
-	dequeue();
-    dequeue();
-    dequeue();
+    enqueue(6.0);
+    enqueue(12.0);
+    enqueue(7.0);
+    enqueue(2.0);
+
     traversal_print();
 
+    dequeue();
+    dequeue();
+
+    traversal_print();
 }
