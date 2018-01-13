@@ -10,7 +10,8 @@ void run_tests(int queue_size, char hold, char* dist_filepath, int num_ops, int 
 int main(void) {
 	char* dist_filepath = "samples/triangular.txt" ;
 	char* save_filepath = "samples/triangular_exec" ;
-	run_tests(50,0,dist_filepath,1000,5,save_filepath);
+	char hold = 1
+	run_tests(50,hold,dist_filepath,1000,5,save_filepath);
 }
 
 // Add argument for data structure to use??
@@ -18,8 +19,6 @@ void run_tests(int queue_size, char hold, char* dist_filepath, int num_ops, int 
 	clock_t start, end;
 	double exec_time;
 	double execution_times[num_trials];
-
-	printf("Moving to methods...\n");
 
 	if(hold) {
 		double sample_list[queue_size + num_ops];
@@ -61,21 +60,16 @@ void run_tests(int queue_size, char hold, char* dist_filepath, int num_ops, int 
 				  enqueue(sample_list[j]);
 	  		}
 
-			printf("Value of J after warmup: %d\n", j);
-	  		printf("Done with UP sequence\n");
-
 	  		//Empty queue
 	  		for(j = 0; j < queue_size; j++){
-	  			printf("Value of J: %d\n", j);
 			  	dequeue();
 	  		}
-	 //  		end = clock();
-	 //  		exec_time = ((double) (end - start)) / CLOCKS_PER_SEC;
-	 //  		execution_times[l] = exec_time;
-	 //  		printf("Exec time was: %f\n", exec_time);
+	  		end = clock();
+	  		exec_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+	  		execution_times[l] = exec_time;
+	  		printf("Exec time was: %f\n", exec_time);
   		}
 	}
-
 	//We are done. Let's save experiment data
 	save_data(save_name, execution_times, num_trials);
 }
