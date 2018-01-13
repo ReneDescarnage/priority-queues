@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "input.h"
+#include "./doubly-linked-list/doubly_linked_list_pq.h"
 
 // Declerations
 void run_tests(int queue_size, int hold, char* dist_filepath, int num_ops, int num_trials, char* save_name);
@@ -36,19 +37,22 @@ void run_tests(int queue_size, int hold, char* dist_filepath, int num_ops, int n
   		for(l = 0; l < num_trials; l++){
 	  		// Create new, clean queue -> ds = linked_list() 
 	  		// Prepare queue with starting configuration
+			reset_queue();
 	  		for(j = 0; j < queue_size; j++){
 	  			// best to pop from list? so we decrease it...?
 	  			// data_structure.enqueue(sample_list[j])
+				  enqueue(sample_list[j]);
 	  		}
+			printf("\n\n###### ---->>> Setup complete!\n\n");
 
 	  		k = j;
 	  		start = clock();
 	  		// Run HOLD method
 	  		for(i = 0; i < num_ops; i++){
 	  			// DQ and throw away
-	  			// data_structure.dequeue()
+	  			dequeue();
 	  			// Enqueue new item
-	  			// data_structure.enqueue(sample_list[k])
+	  			enqueue(sample_list[k]);
 	  			k++;
 	  		}
 	  		end = clock();
