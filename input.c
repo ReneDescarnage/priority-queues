@@ -4,31 +4,32 @@
 #define N_SAMPLES 10000
 #define CHAR_TO_READ 255
 
-/* function declaration */
-void read_data(char* filepath, double* data_array);
+// /* function declaration */
+// void read_data(char* filepath, double* data_array);
+// void save_data(char* filepath, double* data_array);
 
-int main(void) {
-  // Allocate memory for storing data (we want to allocate on stack or heap?)
-  // double **distribution = (double **)malloc(sizeof(double*)*N_SAMPLES);
-  // if (words==NULL)
-  //     {
-  //     fprintf(stderr,"Out of memory (1).\n");
-  //     exit(1);
-  //     }
+// int main(void) {
+//   // Allocate memory for storing data (we want to allocate on stack or heap?)
+//   // double **distribution = (double **)malloc(sizeof(double*)*N_SAMPLES);
+//   // if (words==NULL)
+//   //     {
+//   //     fprintf(stderr,"Out of memory (1).\n");
+//   //     exit(1);
+//   //     }
 
-  // Allocate some space for putting our data etc...
-  double samples[N_SAMPLES];
-  char* filepath = "samples/triangular.txt" ;
+//   // Allocate some space for putting our data etc...
+//   double samples[N_SAMPLES];
+//   char* filepath = "samples/triangular.txt" ;
 
-  //Read in the data from file
-  read_data(filepath, samples);
+//   //Read in the data from file
+//   read_data(filepath, samples);
 
-  // Test to print out some values...
-  int j;
-  for(j = 0; j < 30; j++)
-      printf("%f\n", samples[j]);
+//   // Test to print out some values...
+//   int j;
+//   for(j = 0; j < 30; j++)
+//       printf("%f\n", samples[j]);
 
-} // END OF MAIN
+// } // END OF MAIN
 
 void read_data(char* filepath, double* data_array) {
   char buff[CHAR_TO_READ];
@@ -65,4 +66,10 @@ void read_data(char* filepath, double* data_array) {
   }
 
   fclose(fp);
+}
+
+// Function to save data to a file
+void save_data(char* name, double* data_array){
+  // TO DO
+  return;
 }
