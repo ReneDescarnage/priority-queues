@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include<string.h>
 
 #define N_SAMPLES 10000
 #define CHAR_TO_READ 255
@@ -70,7 +71,32 @@ void read_data(char* filepath, double* data_array, int num_to_read) {
 }
 
 // Function to save data to a file
-void save_data(char* name, double* data_array){
-  // TO DO
-  return;
+void save_data(char* name, double* data_array, int size){
+  // triangular_exec"
+
+  printf("Saving data to file...\n");
+  //Open file
+  FILE *fp;
+  
+  // Concatenate strings...Consider removing??
+  char *filepath = malloc(strlen(name)+strlen(".csv")+1);//+1 for the null-terminator
+  //in real code you would check for errors in malloc here
+  strcpy(filepath, name);
+  strcat(filepath, ".csv");
+
+  fp = fopen(filepath, "w+");
+  int i;
+
+  if (fp == NULL) {
+    fprintf(stderr,"Can't open output file: %s.\n", filepath);
+    exit(2);
+  }
+
+  // //Save data to file
+  for(i=0; i<size; i++){
+    fprintf(fp, ",%f", data_array[i]);
+  }
+  fclose(fp);
+  free(filepath);
+  printf("Successfully created:  %s\n", filepath);
 }
