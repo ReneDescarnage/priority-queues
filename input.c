@@ -31,12 +31,11 @@
 
 // } // END OF MAIN
 
-void read_data(char* filepath, double* data_array) {
+void read_data(char* filepath, double* data_array, int num_to_read) {
   char buff[CHAR_TO_READ];
   char *end;
   double num;
   FILE *fp;
-
 
   fp = fopen(filepath, "r");
   if (fp == NULL)
@@ -45,14 +44,16 @@ void read_data(char* filepath, double* data_array) {
       exit(2);
       }
 
-  // Read all data into our data structure on stack
+  // Read 'num_to_read' amount of data into our data structure on stack
   int i;
-  for (i=0;1;i++) {
+  for (i=0; i<num_to_read; i++) {
     // Reads a line from the file byte by byte...Max CHAR_TO_READ bytes in a single line
     // Regard it as a null terminated string
     //If null, then we have reached the EOF. So lets break.
-    if (fgets(buff, CHAR_TO_READ, fp) == NULL)
+    if (fgets(buff, CHAR_TO_READ, fp) == NULL) {
+      fprintf(stderr,"Error reading enough data. EOF reached prematurely.\n");
       break;
+    }
     // Else lets convert into double and store into data array
     num = strtod(buff, &end);
     data_array[i] = num;

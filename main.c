@@ -23,7 +23,7 @@ void run_tests(int queue_size, int hold, char* dist_filepath, int num_ops, int n
   		int l;
   		int k;
 
-  		read_data(dist_filepath, sample_list);
+  		read_data(dist_filepath, sample_list, (queue_size + num_ops));
   		
   		// testing....
   		for(j = 0; j < 30; j++)
