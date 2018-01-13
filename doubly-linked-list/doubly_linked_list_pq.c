@@ -7,8 +7,8 @@ struct node {
 	struct node* previous;
 };
 
-struct node* head;
-struct node* tail;
+struct node* head = NULL;
+struct node* tail = NULL;
 
 struct node* create_new_node(double priority) {
 	struct node* newNode = (struct node*)malloc(sizeof(struct node));
@@ -58,16 +58,29 @@ void traversal_print() {
 
 // void enqueue() {}
 
-// struct node* dequeue() {}
+double dequeue() {
+    if (head == NULL) {
+        fprintf(stderr, "Cannot dequeue from an empty queue!\n");
+        exit(1);
+    }
+
+    struct node* temp = head;
+    head = head->next;
+    double priority = temp->priority;
+    free(temp);
+
+    return priority;
+}
 
 int main() {
-
-	head = NULL;
-    tail = NULL;
 	
     prepend(1.0);
     prepend(2.0);
     append(3.0);
     traversal_print();
-	
+	dequeue();
+    dequeue();
+    dequeue();
+    traversal_print();
+
 }
