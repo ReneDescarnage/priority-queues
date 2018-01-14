@@ -39,23 +39,34 @@ struct node* merge(struct node* heap1, struct node* heap2) {
     return heap1;
 }
 
-void traverse(struct node* node) {    
+void traverse_print(struct node* node) {
     if (node != NULL) {
         printf("(");
         printf("%f ", node->priority);
-        traverse(node->left);
-        traverse(node->right);
+        traverse_print(node->left);
+        traverse_print(node->right);
         printf(")");
     }
 }
 
+int traverse_count(struct node* node) {
+    if (node != NULL) {
+        return 1 + traverse_count(node->left) + traverse_count(node->right);
+    }
+    return 0;
+}
+
 void traversal_print_heap() {
     printf("Heap: ");
-    traverse(root);
+    traverse_print(root);
     printf("\n");
 }
 
-void reset(struct node* node) {    
+int traversal_count_heap() {
+    return traverse_count(root);
+}
+
+void reset(struct node* node) {
     if (node != NULL) {
         reset(node->left);
         reset(node->right);
