@@ -41,10 +41,8 @@ int main(int argc, char *argv[]) {
                 to_lowercase(impl);
                 if (strcmp(impl, "heap") == 0) {
                     queue_impl = 1;
-                    printf("heap\n");
                 } else if (strcmp(impl, "list") == 0) {
                     queue_impl = 0;
-                    printf("list\n");
                 } else {
                     fprintf(stderr, "Only 'list' and 'heap' are valid options!\n");
                     exit(1);
