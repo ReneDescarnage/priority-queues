@@ -26,7 +26,7 @@ void insert_from_head(double priority) {
         head = newNode;
         tail = newNode;
     } else {
-        while (priority < temp->priority) {
+        while (priority > temp->priority) {
             temp = temp->next;
         }
         newNode->next = temp;
@@ -48,7 +48,7 @@ void insert_from_tail(double priority) {
         head = newNode;
         tail = newNode;
     } else {
-        while (priority > temp->priority) {
+        while (priority < temp->priority) {
             temp = temp->previous;
         }
         newNode->previous = temp;
@@ -103,7 +103,7 @@ void reset_queue() {
 void enqueue(double priority) {
     double averagePriority = average_priority();
 
-    if (priority > averagePriority) {
+    if (priority < averagePriority) {
         // printf("Priority %f > %f (avg): inserting from head!\n", priority, averagePriority);
         insert_from_head(priority);
         // printf("Enqueue - ");
@@ -133,7 +133,7 @@ double dequeue() {
     free(temp);
 
     // printf("Dequeue - ");
-    // printf("List AFTER DQ \n");
+    // printf("List after dequeue:\n");
     // traversal_print();
     // printf("\n");
 
