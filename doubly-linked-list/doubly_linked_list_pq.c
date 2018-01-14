@@ -74,6 +74,18 @@ void traversal_print() {
     printf("\n");
 }
 
+int traversal_count() {
+    struct node* temp = head;
+    int count = 0;
+
+    while (temp != NULL) {
+        count++;
+        temp = temp->next;
+    }
+
+    return count;
+}
+
 double average_priority() {
     double sum = 0;
     int count = 0;
