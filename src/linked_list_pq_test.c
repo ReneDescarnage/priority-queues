@@ -10,15 +10,15 @@ element and hence grows in size of one.
 */
 void test_enqueue_list() {
     // setup
-    reset_queue();
+    reset_list();
 
     // test
-    assert(traversal_count() == 0);
-    enqueue(1.0);
-    assert(traversal_count() == 1);
+    assert(count_list_elements() == 0);
+    enqueue_list(1.0);
+    assert(count_list_elements() == 1);
 
     // teardown
-    reset_queue();
+    reset_list();
 }
 
 /*
@@ -27,16 +27,16 @@ and hence decrease in size of one.
 */
 void test_dequeue_list() {
     // setup
-    reset_queue();
-    enqueue(1.0);
+    reset_list();
+    enqueue_list(1.0);
 
     // test
-    assert(traversal_count() == 1);
-    dequeue();
-    assert(traversal_count() == 0);
+    assert(count_list_elements() == 1);
+    dequeue_list();
+    assert(count_list_elements() == 0);
     
     // teardown
-    reset_queue();
+    reset_list();
 }
 
 /*
@@ -45,17 +45,17 @@ elements are removed.
 */
 void test_reset_list() {
     // setup
-    reset_queue();
-    enqueue(1.0);
-    enqueue(2.0);
+    reset_list();
+    enqueue_list(1.0);
+    enqueue_list(2.0);
 
     // test
-    assert(traversal_count() == 2);
-    reset_queue();
-    assert(traversal_count() == 0);
+    assert(count_list_elements() == 2);
+    reset_list();
+    assert(count_list_elements() == 0);
     
     // teardown
-    reset_queue();
+    reset_list();
 }
 
 /*
@@ -64,17 +64,17 @@ in the list, i.e. the element with highest priority.
 */
 void test_dequeue_smallest_element() {
     // setup
-    reset_queue();
-    enqueue(2.0);
-    enqueue(3.0);
-    enqueue(1.0);
-    enqueue(6.0);
+    reset_list();
+    enqueue_list(2.0);
+    enqueue_list(3.0);
+    enqueue_list(1.0);
+    enqueue_list(6.0);
 
     // test
-    assert(dequeue() == 1.0);
+    assert(dequeue_list() == 1.0);
     
     // teardown
-    reset_queue();
+    reset_list();
 }
 
 /*
@@ -86,22 +86,22 @@ element previously dequeued.
 */
 void test_queue_maintains_internal_order() {
     // setup
-    reset_queue();
+    reset_list();
     double values[6] = {1.715646, 0.763207, 1.044174, 1.336052, 1.487733, 0.851104};
     for (int i = 0; i < 6; i++) {
-        enqueue(values[i]);
+        enqueue_list(values[i]);
     }
 
     // test
-    double pred = dequeue();
+    double pred = dequeue_list();
     for (int i = 1; i < 6; i++) {
-        double current = dequeue();
+        double current = dequeue_list();
         assert(pred < current);
         pred = current;
     }
     
     // teardown
-    reset_queue();
+    reset_list();
 }
 
 /*
