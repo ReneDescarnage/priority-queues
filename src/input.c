@@ -5,33 +5,6 @@
 #define N_SAMPLES 10000
 #define CHAR_TO_READ 255
 
-// /* function declaration */
-// void read_data(char* filepath, double* data_array);
-// void save_data(char* filepath, double* data_array);
-
-// int main(void) {
-//   // Allocate memory for storing data (we want to allocate on stack or heap?)
-//   // double **distribution = (double **)malloc(sizeof(double*)*N_SAMPLES);
-//   // if (words==NULL)
-//   //     {
-//   //     fprintf(stderr,"Out of memory (1).\n");
-//   //     exit(1);
-//   //     }
-
-//   // Allocate some space for putting our data etc...
-//   double samples[N_SAMPLES];
-//   char* filepath = "samples/triangular.txt" ;
-
-//   //Read in the data from file
-//   read_data(filepath, samples);
-
-//   // Test to print out some values...
-//   int j;
-//   for(j = 0; j < 30; j++)
-//       printf("%f\n", samples[j]);
-
-// } // END OF MAIN
-
 void read_data(char *filepath, double *data_array, int num_to_read) {
   char buff[CHAR_TO_READ];
   char *end;
