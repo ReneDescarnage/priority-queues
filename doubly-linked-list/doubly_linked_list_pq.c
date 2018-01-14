@@ -26,7 +26,7 @@ void insert_from_head(double priority) {
         head = newNode;
         tail = newNode;
     } else {
-        while (priority < temp->priority) {
+        while (priority > temp->priority) {
             temp = temp->next;
         }
         newNode->next = temp;
@@ -48,7 +48,7 @@ void insert_from_tail(double priority) {
         head = newNode;
         tail = newNode;
     } else {
-        while (priority > temp->priority) {
+        while (priority < temp->priority) {
             temp = temp->previous;
         }
         newNode->previous = temp;
@@ -75,17 +75,19 @@ void traversal_print() {
 }
 
 double average_priority() {
-    struct node* temp = head;
-    double prioritySum = 0;
+    double sum = 0;
     int count = 0;
 
-    while (temp != NULL) {
-        prioritySum += temp->priority;
+    if (head != NULL) {
+        sum += head->priority;
         count++;
-        temp = temp->next;
+    }
+    if (tail != NULL) {
+        sum += tail->priority;
+        count++;
     }
 
-    return count > 0 ? prioritySum / count : 0;
+    return count == 0 ? 0 : sum / count;
 }
 
 void reset_queue() {
@@ -101,16 +103,16 @@ void reset_queue() {
 }
 
 void enqueue(double priority) {
-    double averagePriority = average_priority();
+    double averageHeadTail = average_priority();
 
-    if (priority > averagePriority) {
-        // printf("Priority %f > %f (avg): inserting from head!\n", priority, averagePriority);
+    if (priority < averageHeadTail) {
+        // printf("Priority %f > %f (avg): inserting from head!\n", priority, averageHeadTail);
         insert_from_head(priority);
         // printf("Enqueue - ");
         // traversal_print();
         // printf("\n");
     } else {
-        // printf("Priority %f < %f (avg): inserting from tail!\n", priority, averagePriority);
+        // printf("Priority %f < %f (avg): inserting from tail!\n", priority, averageHeadTail);
         insert_from_tail(priority);
         // printf("Enqueue - ");
         // traversal_print();
@@ -133,7 +135,7 @@ double dequeue() {
     free(temp);
 
     // printf("Dequeue - ");
-    // printf("List AFTER DQ \n");
+    // printf("List after dequeue:\n");
     // traversal_print();
     // printf("\n");
 

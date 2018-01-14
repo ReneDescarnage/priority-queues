@@ -25,7 +25,7 @@ struct node* merge(struct node* heap1, struct node* heap2) {
     } else if (heap2 == NULL) {
         return heap1;
     } else {
-        if (heap1->priority < heap2->priority) {
+        if (heap1->priority > heap2->priority) {
             temp = heap1;
             heap1 = heap2;
             heap2 = temp;
@@ -71,6 +71,9 @@ void reset_heap() {
 void enqueue_heap(double priority) {
     struct node* newNode = create_new_heap_node(priority);
     root = merge(root, newNode);
+    // printf("Enqueue - ");
+    // traversal_print_heap();
+    // printf("\n");
 }
 
 double dequeue_heap() {
@@ -86,6 +89,11 @@ double dequeue_heap() {
     temp1 = merge(temp1, temp2);
     free(root);
     root = temp1;
+
+    // printf("Dequeue - ");
+    // printf("List after dequeue:\n");
+    // traversal_print_heap();
+    // printf("\n");
 
     return priority;
 }
