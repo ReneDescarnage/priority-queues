@@ -25,9 +25,14 @@ def construct_command(i, q, h, d, o, t):
 # Compile program.
 subprocess.run(compile_command)
 
-# Loop over all possible configs later...
-run_command = construct_command(data_structures[0], queue_sizes[0], hold[0], distribution[4], num_ops, num_trials)
-subprocess.run(run_command)
+# Loop over all possible configs and run experiments.
+for ds in data_structures:
+	for h in hold:
+		for dist in distribution:
+			for q in queue_sizes:
+				run_command = construct_command(ds, q, h, dist, num_ops, num_trials)
+				# Will wait for process to complete before returning.
+				subprocess.run(run_command)
 
 
 
