@@ -3,7 +3,7 @@
 
 _This repository contains code written during the fall semester 2017 by Cedric Seger and Simone Stefani_
 
-#### Running the experiment
+## Running the experiment
 In order to run the experiment with custom parameters first compile the C files in `src/`:
 ```bash
 $ cd src/
@@ -26,11 +26,11 @@ The following arguments are accepted/required:
 Example input:
 `$ ./experiment.out -i heap -q 10 -h 1 -d samples/triangular.txt -s samples/triangular_exec -o 100 -t 5`
 
-#### Running the Python script
+## Running the Python script
 This feature requires Python 3.5 or greater on the machine. In the main base folder run:
 `$ python3 task_runner.py`
 
-#### Running the tests
+## Running the tests
 Move in the `src/` folder compile the test with the corresponding data structure implementation and run the executable:
 ```bash
 $ cd src/
