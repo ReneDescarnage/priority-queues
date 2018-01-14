@@ -2,7 +2,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "./linked_list_pq.h"
+#include "linked_list_pq.h"
 
 /*
 Test if the linked list can correctly enqueue a new
