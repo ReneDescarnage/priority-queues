@@ -34,8 +34,5 @@ for ds in data_structures:
 				# Will wait for process to complete before returning.
 				subprocess.run(run_command)
 
-# run_command = construct_command(data_structures[0], queue_sizes[0], hold[0], distribution[4], num_ops, num_trials)
-# subprocess.run(run_command)
-
 
 
