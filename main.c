@@ -126,7 +126,7 @@ void run_tests(int queue_impl, int queue_size, int hold, char* dist_filepath, in
             
             exec_time = ((double) (end - start)) / CLOCKS_PER_SEC;
             execution_times[l] = exec_time;
-            printf("Exec time was: %f\n", exec_time);
+            // printf("Exec time was: %f\n", exec_time);
         }
     } else {
         double sample_list[queue_size];
@@ -150,7 +150,7 @@ void run_tests(int queue_impl, int queue_size, int hold, char* dist_filepath, in
             end = clock();
             exec_time = ((double) (end - start)) / CLOCKS_PER_SEC;
             execution_times[l] = exec_time;
-            printf("Exec time was: %f\n", exec_time);
+            // printf("Exec time was: %f\n", exec_time);
         }
     }
 
