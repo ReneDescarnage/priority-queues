@@ -12,6 +12,7 @@ $ gcc input.c linked_list_pq.c main.c skewed_heap_pq.c -o experiment.out
 ```
 
 Then run the executable:
+
 `./experiment.out`
 
 The following arguments are accepted/required:
@@ -24,10 +25,12 @@ The following arguments are accepted/required:
 - t: number of trials to run
 
 Example input:
+
 `$ ./experiment.out -i heap -q 10 -h 1 -d samples/triangular.txt -s samples/triangular_exec -o 100 -t 5`
 
 ## Running the Python script
 This feature requires Python 3.5 or greater on the machine. In the main base folder run:
+
 `$ python3 task_runner.py`
 
 ## Running the tests
