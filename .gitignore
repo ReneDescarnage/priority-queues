@@ -58,9 +58,5 @@ dkms.conf
 .DS_Store
 .ipynb_checkpoints/
 
-output/
-
 # End of https://www.gitignore.io/api/c
 
-# CSV output
-*.csv
