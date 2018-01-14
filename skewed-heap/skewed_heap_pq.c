@@ -2,19 +2,19 @@
 #include <stdlib.h>
 
 struct node {
-	double priority;
-	struct node* left;
-	struct node* right;
+    double priority;
+    struct node* left;
+    struct node* right;
 };
 
 struct node* root = NULL;
 
-struct node* create_new_node(double priority) {
-	struct node* newNode = (struct node*)malloc(sizeof(struct node));
-	newNode->priority = priority;
-	newNode->left = NULL;
-	newNode->right = NULL;
-	return newNode;
+struct node* create_new_heap_node(double priority) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->priority = priority;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
 }
 
 struct node* merge(struct node* heap1, struct node* heap2) {
@@ -40,7 +40,7 @@ struct node* merge(struct node* heap1, struct node* heap2) {
 }
 
 void traverse(struct node* node) {    
-	if (node != NULL) {
+    if (node != NULL) {
         printf("(");
         printf("%f ", node->priority);
         traverse(node->left);
@@ -49,14 +49,14 @@ void traverse(struct node* node) {
     }
 }
 
-void traversal_print() {
+void traversal_print_heap() {
     printf("Heap: ");
     traverse(root);
     printf("\n");
 }
 
 void reset(struct node* node) {    
-	if (node != NULL) {
+    if (node != NULL) {
         reset(node->left);
         reset(node->right);
         free(node);
@@ -64,12 +64,12 @@ void reset(struct node* node) {
 }
 
 void reset_heap() {
-	reset(root);
-	root = NULL;
+    reset(root);
+    root = NULL;
 }
 
 void enqueue_heap(double priority) {
-    struct node* newNode = create_new_node(priority);
+    struct node* newNode = create_new_heap_node(priority);
     root = merge(root, newNode);
 }
 
@@ -90,23 +90,23 @@ double dequeue_heap() {
     return priority;
 }
 
-int main() {
-	
-    enqueue(6.0);
-    enqueue(12.0);
-    enqueue(7.0);
-    enqueue(2.0);
+// int main() {
+    
+//     enqueue(6.0);
+//     enqueue(12.0);
+//     enqueue(7.0);
+//     enqueue(2.0);
 
-    traversal_print();
+//     traversal_print();
 
-    dequeue();
-    dequeue();
+//     dequeue();
+//     dequeue();
 
-    traversal_print();
+//     traversal_print();
 
-    reset_queue();
+//     reset_queue();
 
-    traversal_print();
-}
+//     traversal_print();
+// }
 
 

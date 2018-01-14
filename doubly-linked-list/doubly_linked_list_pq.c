@@ -2,30 +2,30 @@
 #include <stdlib.h>
 
 struct node {
-	double priority;
-	struct node* next;
-	struct node* previous;
+    double priority;
+    struct node* next;
+    struct node* previous;
 };
 
 struct node* head = NULL;
 struct node* tail = NULL;
 
 struct node* create_new_node(double priority) {
-	struct node* newNode = (struct node*)malloc(sizeof(struct node));
-	newNode->priority = priority;
-	newNode->previous = NULL;
-	newNode->next = NULL;
-	return newNode;
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->priority = priority;
+    newNode->previous = NULL;
+    newNode->next = NULL;
+    return newNode;
 }
 
 void insert_from_head(double priority) {
-	struct node* newNode = create_new_node(priority);
+    struct node* newNode = create_new_node(priority);
     struct node* temp = head;
 
-	if (head == NULL) {
-	    head = newNode;
-		tail = newNode;
-	} else {
+    if (head == NULL) {
+        head = newNode;
+        tail = newNode;
+    } else {
         while (priority < temp->priority) {
             temp = temp->next;
         }
@@ -41,12 +41,12 @@ void insert_from_head(double priority) {
 }
 
 void insert_from_tail(double priority) {
-	struct node* newNode = create_new_node(priority);
+    struct node* newNode = create_new_node(priority);
     struct node* temp = tail;
 
-	if (tail == NULL) {
-	    head = newNode;
-		tail = newNode;
+    if (tail == NULL) {
+        head = newNode;
+        tail = newNode;
     } else {
         while (priority > temp->priority) {
             temp = temp->previous;
@@ -63,40 +63,40 @@ void insert_from_tail(double priority) {
 }
 
 void traversal_print() {
-	struct node* temp = head;
-	printf("List: ");
+    struct node* temp = head;
+    printf("List: ");
 
-	while (temp != NULL) {
-		printf("%f ", temp->priority);
-		temp = temp->next;
-	}
+    while (temp != NULL) {
+        printf("%f ", temp->priority);
+        temp = temp->next;
+    }
 
-	printf("\n");
+    printf("\n");
 }
 
 double average_priority() {
-	struct node* temp = head;
+    struct node* temp = head;
     double prioritySum = 0;
     int count = 0;
 
-	while (temp != NULL) {
+    while (temp != NULL) {
         prioritySum += temp->priority;
         count++;
-		temp = temp->next;
-	}
+        temp = temp->next;
+    }
 
-	return count > 0 ? prioritySum / count : 0;
+    return count > 0 ? prioritySum / count : 0;
 }
 
 void reset_queue() {
-	struct node* temp = head;
+    struct node* temp = head;
 
-	while (temp != NULL) {
+    while (temp != NULL) {
         free(temp);
-		temp = temp->next;
-	}
+        temp = temp->next;
+    }
 
-	head = NULL;
+    head = NULL;
     tail = NULL;
 }
 
@@ -141,7 +141,7 @@ double dequeue() {
 }
 
 // int main() {
-	
+    
 //     enqueue(6.0);
 //     enqueue(12.0);
 //     enqueue(7.0);
